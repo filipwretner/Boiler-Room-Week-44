@@ -1,11 +1,13 @@
 let toDoList = [];
-let isCompleted = false;
+
 class task {
+
     constructor(taskID, taskDescription, isCompleted) {
         this.taskID = taskID;
         this.taskDescription = taskDescription;
         this.isCompleted = isCompleted;
     }
+
 }
 
 // Main menu function for the To-Do application
@@ -66,7 +68,8 @@ function addToDo() {
 
 
     //Create and return new task
-    let newTask = new task(newID, prompt(), false);
+    let newTask = new task(newID, prompt(`Ange beskrivning:`), "Ej Klar");
+
     toDoList.push(newTask);
 }
 
@@ -79,12 +82,12 @@ function showToDo() {
         console.log(`Alla uppgifter:`);
         alert(`Alla uppgifter:`);
         // toDoList.forEach(todo => console.log(`Visa ID: Visa beskrivning: Visa status:`));
-        // toDoList.forEach(toDo => alert(`Visa ID: ${taskID} Visa beskrivning: ${taskDescription} Visa status: ${isComplete} `));
+        toDoList.forEach(task => alert(`Visa ID: ${task.taskID} Visa beskrivning: ${task.taskDescription} Visa status: ${task.isCompleted} `));
         // console.log(toDoList.taskID);
 
-        for (let i = 0; i < toDoList.length; i++) {
-            console.log(toDoList[i].taskID);
-        }
+        // for (let i = 0; i < toDoList.length; i++) {
+        //     console.log(toDoList[i].taskID);
+        // }
     }
 
 }
@@ -92,46 +95,67 @@ function showToDo() {
 function markAsCompleteToDo() {
 
 
-    let markID = prompt('Ange ID för uppgiften du vill markera som klar:');
+    let id = parseInt(prompt('Ange ID för uppgiften du vill markera som klar:'));
     // Be användaren om id för den uppgift som ska markeras som klar
     // Konvertera input till ett nummer om det behövs
-    markID = parseInt(markID);
-
-
+    
     // Hitta uppgiften med det angivna id:t
     let taskFound = false;
 
     for (let i = 0; i < toDoList.length; i++) {
-        if (toDoList[i].taskID === markID) {
+
+        if (toDoList[i].taskID === id) {
             // Markera uppgiften som klar
             
             alert(`Uppgiften med ID ${toDoList[i].taskID} har markerats som klar.`);
-            toDoList[i].isCompleted = true;
+            toDoList[i].isCompleted = "Klar";
+            taskFound = true;
             break;
-        } else if (!taskFound) {
-            alert(`Ingen uppgift med ID ${toDoList[i].taskID} hittades.`);
-        }
+
+        } 
     }
 
+    if (!taskFound) {
+        alert(`Ingen uppgift med ID ${id} hittades.`);
+    }
+
+}
 
 
 function deleteToDo() {
 
-    let deleteID = prompt("Skriv in ID på den uppgift du vill ta bort:")
+    let id = parseInt(prompt("Skriv in ID på den uppgift du vill ta bort:"));
 
-    if (deleteID > 1 || deleteID > toDoList.length) {
-        console.log("Invalid item to remove, please enter an item that exists");
-        return;
-        
-    } else {
-        let removedItem = toDoList.splice(deleteID - 1, 1);
-        console.log(`Removed: "${removedItem[0]}"`);
-        
-        showToDo();
-        
-        
+    let taskFound = false;
+
+    for (let i = 0; i < toDoList.length; i++) {
+
+        if (toDoList[i].taskID === id) {
+            // Markera uppgiften som klar
+            
+            alert(`Uppgiften med ID ${toDoList[i].taskID} har tagits bort.`);
+            toDoList.splice(i, 1);
+            taskFound = true;
+            break;
+
+        } 
     }
-}
 
+    if (!taskFound) {
+        alert(`Ingen uppgift med ID ${id} hittades.`);
+    }
+
+    // if (id > 1 || id > toDoList.length) {
+    //     console.log("Invalid item to remove, please enter an item that exists");
+    //     return;
+        
+    // } else {
+    //     toDoList.splice(id - 1, 1);
+    //     // console.log(`Removed: "${removedItem[0]}"`);
+        
+    //     showToDo();
+        
+    // }
+}
 
 mainMenu(); // Making sure the application actually runs
