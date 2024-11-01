@@ -1,4 +1,16 @@
 
+class task {
+    constructor(taskID, taskDescription, isComplete) {
+        this.taskID = taskID
+        this.taskDescription = taskDescription;
+        this.isComplete = isComplete;
+    }
+}
+
+function mainMenu() {
+
+
+
 // Main menu function for the To-Do application
 function mainMenu() {
     let choice; // Variable to store the user's menu choice
@@ -50,6 +62,18 @@ function mainMenu() {
 
 
 
+function addToDo() {
+    // Generate a unique ID
+    let newID;
+    do {
+        newID = Math.random();
+    } while (toDoList.some(task => task.taskID === newID)); // Check if ID is in use
+
+
+
+    //Create and return new task
+    let newTask = new task(newID, prompt(), false);
+    return newTask;
 }
 
 function showToDo() {
@@ -58,10 +82,13 @@ function showToDo() {
 let tasks = [];
 
 function markAsComplete() {
+
+
     let toDoListId = prompt('Ange ID för uppgiften du vill markera som klar:');
     // Be användaren om id för den uppgift som ska markeras som klar
     // Konvertera input till ett nummer om det behövs
     toDoListId = parseInt(toDoListId);
+
 
     // Hitta uppgiften med det angivna id:t
     let taskFound = false;
@@ -82,9 +109,15 @@ function markAsComplete() {
 }
 
 
+function deleteToDo() {
+
+}
+
+
 
 
 function deleteToDo() {
     
 }
 mainMenu(); // Making sure the application actually runs
+
