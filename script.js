@@ -22,6 +22,7 @@ function removeItem(deleteToDo) {
     } else {
         let removedItem = todoList.splice(deleteToDo - 1, 1);
         console.log(`Removed: "${removedItem[0]}"`);
+        
         showToDo();
         
         
