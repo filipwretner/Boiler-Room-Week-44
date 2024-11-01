@@ -1,15 +1,12 @@
-
+let toDoList = [];
+let isCompleted = false;
 class task {
-    constructor(taskID, taskDescription, isComplete) {
-        this.taskID = taskID
+    constructor(taskID, taskDescription, isCompleted) {
+        this.taskID = taskID;
         this.taskDescription = taskDescription;
-        this.isComplete = isComplete;
+        this.isCompleted = isCompleted;
     }
 }
-
-function mainMenu() {
-
-
 
 // Main menu function for the To-Do application
 function mainMenu() {
@@ -45,7 +42,7 @@ function mainMenu() {
                 break;
 
             case '4':
-                deleteDo(); // Call function to delete a task
+                deleteToDo(); // Call function to delete a task
                 break;
 
             case '5':
@@ -58,76 +55,76 @@ function mainMenu() {
 
     } while(choice !== '5'); // Continue loop until the user chooses to exit
 }
-// Global array för att lagra uppgifter
-
-
 
 function addToDo() {
     // Generate a unique ID
     let newID;
     do {
-        newID = Math.random();
+        newID = parseInt(Math.random() * 100);
     } while (toDoList.some(task => task.taskID === newID)); // Check if ID is in use
 
 
 
     //Create and return new task
     let newTask = new task(newID, prompt(), false);
-    return newTask;
+    toDoList.push(newTask);
 }
 
 function showToDo() {
 
-
-
-    if (todolist.length === 0) {
+    if (toDoList.length === 0) {
         console.log(`Just nu finns det inga uppgifter att visa`);
         alert(`Just nu finns det inga uppgifter att visa`);
     } else {
         console.log(`Alla uppgifter:`);
         alert(`Alla uppgifter:`);
-        todolist.forEach(todo => console.log(`Visa ID: Visa beskrivning: Visa status:`));
-        todolist.forEach(todo => alert(`Visa ID: Visa beskrivning: Visa status:`));
+        // toDoList.forEach(todo => console.log(`Visa ID: Visa beskrivning: Visa status:`));
+        // toDoList.forEach(toDo => alert(`Visa ID: ${taskID} Visa beskrivning: ${taskDescription} Visa status: ${isComplete} `));
+        // console.log(toDoList.taskID);
+
+        for (let i = 0; i < toDoList.length; i++) {
+            console.log(toDoList[i].taskID);
+        }
     }
 
 }
-let tasks = [];
 
-function markAsComplete() {
+function markAsCompleteToDo() {
 
 
-    let toDoListId = prompt('Ange ID för uppgiften du vill markera som klar:');
+    let markID = prompt('Ange ID för uppgiften du vill markera som klar:');
     // Be användaren om id för den uppgift som ska markeras som klar
     // Konvertera input till ett nummer om det behövs
-    toDoListId = parseInt(toDoListId);
+    markID = parseInt(markID);
 
 
     // Hitta uppgiften med det angivna id:t
     let taskFound = false;
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].id === toDoListId) {
+
+    for (let i = 0; i < toDoList.length; i++) {
+        if (toDoList[i].taskID === markID) {
             // Markera uppgiften som klar
-            tasks[i].completed = true;
-            alert(`Uppgiften med ID ${toDoListId} har markerats som klar.`);
-            taskFound = true;
+            
+            alert(`Uppgiften med ID ${toDoList[i].taskID} har markerats som klar.`);
+            toDoList[i].isCompleted = true;
             break;
+        } else if (!taskFound) {
+            alert(`Ingen uppgift med ID ${toDoList[i].taskID} hittades.`);
         }
     }
 
-    // Om ingen uppgift hittades med det id:t
-    if (!taskFound) {
-        alert(`Ingen uppgift med ID ${toDoListId} hittades.`);
-    }
-}
 
 
-function removeItem(deleteToDo) {
-    if (deleteToDo > 1 || deleteToDo > todoList.lenght) {
+function deleteToDo() {
+
+    let deleteID = prompt("Skriv in ID på den uppgift du vill ta bort:")
+
+    if (deleteID > 1 || deleteID > toDoList.length) {
         console.log("Invalid item to remove, please enter an item that exists");
         return;
         
     } else {
-        let removedItem = todoList.splice(deleteToDo - 1, 1);
+        let removedItem = toDoList.splice(deleteID - 1, 1);
         console.log(`Removed: "${removedItem[0]}"`);
         
         showToDo();
@@ -137,16 +134,4 @@ function removeItem(deleteToDo) {
 }
 
 
-function deleteToDo() {
-
-}
-
-
-
-
-function deleteToDo() {
-    
-}
 mainMenu(); // Making sure the application actually runs
-
-
