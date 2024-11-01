@@ -6,7 +6,8 @@ function (addToDo) {
 
 }
 
-function (showToDo) {
+function showToDo() {
+
     if (todolist.length === 0) {
         console.log(`Just nu finns det inga uppgifter att visa`);
         alert(`Just nu finns det inga uppgifter att visa`);
