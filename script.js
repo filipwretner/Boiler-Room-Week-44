@@ -1,4 +1,4 @@
-let toDoList = [];
+let toDoList = []; // Empty array that we fill with items
 
 // Class that acts as a template for creating objects
 class task {
@@ -80,8 +80,6 @@ function showToDo() {
 
     console.log(`Du valde 2. i menyn för att visa lagrade uppgifter`);
 
-    let showList;
-
     if (toDoList.length === 0) { // Checks if there is any items in the list
 
         console.log(`Just nu finns det inga uppgifter att visa`);
@@ -94,7 +92,7 @@ function showToDo() {
 
 
         console.log(`Uppgifter:`);
-        filteredList.forEach(task => console.log(`Visa ID: ${task.taskID} Visa beskrivning: ${task.taskDescription} Visa status: ${task.isCompleted} `)); // Prints out the filtered list, if no filter was chosen the entire toDoList becomes the filteredList
+        filteredList.forEach(task => console.log(`ID: ${task.taskID} Beskrivning: ${task.taskDescription} Visa status: ${task.isCompleted} `)); // Prints out the filtered list, if no filter was chosen the entire toDoList becomes the filteredList
         alert(`Uppgifter visas i konsolen.`);
 
     }
