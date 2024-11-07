@@ -1,38 +1,40 @@
-// Hämtar element och tilldelar dem variabler
+let toDoList = [];
+
+// Getting the elements and assign them to variables
 const taskForm = document.getElementById("taskForm"); // form
 const taskInput = document.getElementById("taskInput"); // input
 const taskList = document.getElementById("taskList"); // ul
-const message = document.getElementById("message"); // paragraf för felmeddelande
+const message = document.getElementById("message"); // paragraph for error message
 
 function showToDo() {
 
-    message.innerText = ""; // Tömmer felmeddelandet varje gång vi visar denna funktion
-    taskList.innerHTML = ""; // Tömmer den varje gång vi kallar på funktionen, lägger sedan till alla items i listan igen
+    message.innerText = ""; // Empties the error message each time we run this function
+    taskList.innerHTML = ""; // Empties the ul element each time we run this function, otherwise it adds the entire list everytime (example, if we have 1 item, then add a second one it adds both but the first remains in the list, so we reset it every time)
 
-    toDoList.forEach(task => { // För varje uppgift i arrayen lägger vi till HTML element
+    toDoList.forEach(task => { // Adds HTML elements for each task in the main array
 
-        const showTask = document.createElement("li"); // Skapar ett list element
-        showTask.className = task.isCompleted ? "completed" : ""; // Tilldelar klassen completed om vi har markerat en uppgift som klar
-        showTask.dataset.id = task.taskID; // Tilldelar den det ID som skapades när vi lade till uppgiften som id i HTML
+        const showTask = document.createElement("li"); // Creates list element
+        showTask.className = task.isCompleted ? "completed" : ""; // Assigns the completed class if we marked it as complete
+        showTask.dataset.id = task.taskID; // Assigns the ID we create when we add a task as the HTML id for every list item, we use this to easier mark tasks as complete and delete them
 
-        const showDescription = document.createElement("p"); // Skapar en p för beskrivningen 
+        const showDescription = document.createElement("p"); // Creates a paragraph for the description of the task
         showDescription.textContent = task.taskDescription;
 
-        const completeTask = document.createElement("button"); // Skapar en knapp för att markera som klar
-        completeTask.className = "completeButton"; // Tilldelar klass för att kunna göra olika styling
+        const completeTask = document.createElement("button"); // Creates a button for marking task as done
+        completeTask.className = "completeButton"; // Assigns class to do different stylings on the buttons
         completeTask.textContent = "Markera uppgift som klar";
-        completeTask.addEventListener("click", () => markAsCompleteToDo(task.taskID)); // Kallar på markAsComplete funktionen och skickar med det ID för uppgiften vi klickade på
+        completeTask.addEventListener("click", () => markAsCompleteToDo(task.taskID)); // Calls the markAsCompleteToDo function and sends the ID of the task we want to mark as complete
 
-        const deleteTask = document.createElement("button"); // Skapar en knapp för att ta bort uppgift
-        deleteTask.className = "deleteButton"; // Tilldelar klass för att kunna göra olika styling
+        const deleteTask = document.createElement("button"); // Creates a button for deleting tasks
+        deleteTask.className = "deleteButton"; // Assigns class to do different stylings on the buttons
         deleteTask.textContent = "Ta bort uppgift";
-        deleteTask.addEventListener("click", () => deleteToDo(task.taskID)); // Kallar på deleteToDo funktionen och skickar med det ID för uppgiften vi klickade på
+        deleteTask.addEventListener("click", () => deleteToDo(task.taskID)); // Calls on the deleteToDo function and sends the ID of the task we want to delete
 
-        // Lägger till alla element i rätt ordning under li
+        // Adds all the elements in the correct order under the li element we created
         showTask.appendChild(showDescription);
         showTask.appendChild(completeTask);
         showTask.appendChild(deleteTask);
-        taskList.appendChild(showTask); // Lägger till li i ul
+        taskList.appendChild(showTask); // Adds the complete li element to the ul element
 
     });
 }
