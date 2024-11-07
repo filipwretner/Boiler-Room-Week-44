@@ -30,6 +30,8 @@ form {
 
 form p {
     grid-column: 1 / span 2;
+    font-size: 2rem;
+    color: #c9302c;
 }
 
 form input {
@@ -58,10 +60,12 @@ li {
 
 li p {
     margin: 1rem;
+    padding: 1rem;
+    font-size: 20px;
 }
 
 li.completed {
-    border: 1px solid aquamarine;
+    border: 1px solid green;
 }
 
 li button {
