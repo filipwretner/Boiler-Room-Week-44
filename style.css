@@ -98,6 +98,18 @@ li button {
     display: flex;
     gap: 10px;
 }
+.editButton {
+    background-color: #4c77af; /* Ändra detta värde till den färg du vill använda */
+    color: white; /* Textfärg */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px; /* Gör knappen lite rundad */
+    margin-left: 5px; /* Lägger lite avstånd mellan knapparna */
+}
+
+
+
 
 #filterSelect, #sortSelect, #searchInput {
     padding: 8px;
@@ -116,7 +128,7 @@ li button {
 
 .completed {
     text-decoration: line-through;
-    color: grey;
+    color: rgb(3, 3, 3);
 }
 
 .completeButton, .deleteButton, .editButton {
