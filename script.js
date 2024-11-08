@@ -55,9 +55,14 @@ function mainMenu() {
 
     } while(choice !== '6'); // Continue loop until the user chooses to exit by putting in 5
 }
+// Global array för att lagra uppgifter
 
+<<<<<<< HEAD
 // Function to add a new item in the list
 function addToDo() {
+=======
+
+>>>>>>> f9f0f85841a013b91b7b18fa5d2554a7801a041b
 
     console.log(`Du valde 1. i menyn för att skapa en ny uppgift`);
 
@@ -78,6 +83,7 @@ function addToDo() {
 // Function to show items in the list
 function showToDo() {
 
+<<<<<<< HEAD
     console.log(`Du valde 2. i menyn för att visa lagrade uppgifter`);
 
     let showList;
@@ -98,9 +104,36 @@ function showToDo() {
         alert(`Uppgifter visas i konsolen.`);
 
     }
+=======
+}
+let tasks = [];
 
+function markAsComplete() {
+    let toDoListId = prompt('Ange ID för uppgiften du vill markera som klar:');
+    // Be användaren om id för den uppgift som ska markeras som klar
+    // Konvertera input till ett nummer om det behövs
+    toDoListId = parseInt(toDoListId);
+>>>>>>> f9f0f85841a013b91b7b18fa5d2554a7801a041b
+
+    // Hitta uppgiften med det angivna id:t
+    let taskFound = false;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === toDoListId) {
+            // Markera uppgiften som klar
+            tasks[i].completed = true;
+            alert(`Uppgiften med ID ${toDoListId} har markerats som klar.`);
+            taskFound = true;
+            break;
+        }
+    }
+
+    // Om ingen uppgift hittades med det id:t
+    if (!taskFound) {
+        alert(`Ingen uppgift med ID ${toDoListId} hittades.`);
+    }
 }
 
+<<<<<<< HEAD
 // Function to mark an item as complete
 function markAsCompleteToDo() {
 
@@ -135,6 +168,11 @@ function markAsCompleteToDo() {
 }
 
 // Function to delete an item from the list
+=======
+
+
+
+>>>>>>> f9f0f85841a013b91b7b18fa5d2554a7801a041b
 function deleteToDo() {
 
     console.log(`Du valde 4. i menyn för att ta bort uppgifter från listan`); 
