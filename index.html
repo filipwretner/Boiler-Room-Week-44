@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boiler Room Vecka 44 - Linköping Team 2</title>
+    <title>To-Do Applikation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>To Do List</h1>
+    <div class="container">
+        <h1>To-Do Applikation</h1>
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Ange en ny uppgift" required> 
+            <input type="text" id="categoryInput" placeholder="Ange kategori">
+            <button type="submit">Lägg till i To-Do List</button>
+            <p id="message"></p>
+        </form>
 
+        <div class="controls">
+            <select id="filterSelect">
+                <option value="all">Visa alla</option>
+                <option value="completed">Klara</option>
+                <option value="not_completed">Ej klara</option>
+            </select>
+
+            <select id="sortSelect">
+                <option value="date">Sortera efter datum</option>
+                <option value="status">Sortera efter status</option>
+            </select>
+
+            <input type="text" id="searchInput" placeholder="Sök uppgifter">
+        </div>
+
+        <ul id="taskList"></ul>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
