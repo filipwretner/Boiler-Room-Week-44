@@ -1,40 +1,95 @@
+// To-Doリストのタスクを格納する配列
 let toDoList = [];
 
-// Getting the elements and assign them to variables
-const taskForm = document.getElementById("taskForm"); // form
-const taskInput = document.getElementById("taskInput"); // input
-const taskList = document.getElementById("taskList"); // ul
-const message = document.getElementById("message"); // paragraph for error message
+// 各要素を取得し、変数に代入
+const taskForm = document.getElementById("taskForm"); // フォーム要素
+const taskInput = document.getElementById("taskInput"); // タスク入力フィールド
+const taskList = document.getElementById("taskList"); // タスク一覧のul要素
+const message = document.getElementById("message"); // エラーメッセージ用のp要素
 
+// タスクを表示する関数
 function showToDo() {
+    message.innerText = ""; // エラーメッセージをクリア
+    taskList.innerHTML = ""; // 画面のタスクリストをクリア
 
-    message.innerText = ""; // Empties the error message each time we run this function
-    taskList.innerHTML = ""; // Empties the ul element each time we run this function, otherwise it adds the entire list everytime (example, if we have 1 item, then add a second one it adds both but the first remains in the list, so we reset it every time)
+    // toDoListにある各タスクをループして表示
+    toDoList.forEach(task => { 
+        const showTask = document.createElement("li"); // li要素を作成
+        showTask.className = task.isCompleted ? "completed" : ""; // タスクが完了していれば"completed"クラスを付与
+        showTask.dataset.id = task.taskID; // タスクのIDをdata-id属性に設定
 
-    toDoList.forEach(task => { // Adds HTML elements for each task in the main array
-
-        const showTask = document.createElement("li"); // Creates list element
-        showTask.className = task.isCompleted ? "completed" : ""; // Assigns the completed class if we marked it as complete
-        showTask.dataset.id = task.taskID; // Assigns the ID we create when we add a task as the HTML id for every list item, we use this to easier mark tasks as complete and delete them
-
-        const showDescription = document.createElement("p"); // Creates a paragraph for the description of the task
+        const showDescription = document.createElement("p"); // タスク内容表示用のp要素
         showDescription.textContent = task.taskDescription;
 
-        const completeTask = document.createElement("button"); // Creates a button for marking task as done
-        completeTask.className = "completeButton"; // Assigns class to do different stylings on the buttons
-        completeTask.textContent = "Markera uppgift som klar";
-        completeTask.addEventListener("click", () => markAsCompleteToDo(task.taskID)); // Calls the markAsCompleteToDo function and sends the ID of the task we want to mark as complete
+        const completeTask = document.createElement("button"); // 完了ボタンを作成
+        completeTask.className = "completeButton";
+        completeTask.textContent = "Markera uppgift som klar"; // ボタンに「タスクを完了」と表示
+        completeTask.addEventListener("click", () => markAsCompleteToDo(task.taskID)); // ボタンがクリックされたらmarkAsCompleteToDo関数を呼び出し
 
-        const deleteTask = document.createElement("button"); // Creates a button for deleting tasks
-        deleteTask.className = "deleteButton"; // Assigns class to do different stylings on the buttons
-        deleteTask.textContent = "Ta bort uppgift";
-        deleteTask.addEventListener("click", () => deleteToDo(task.taskID)); // Calls on the deleteToDo function and sends the ID of the task we want to delete
+        const deleteTask = document.createElement("button"); // 削除ボタンを作成
+        deleteTask.className = "deleteButton";
+        deleteTask.textContent = "Ta bort uppgift"; // ボタンに「タスクを削除」と表示
+        deleteTask.addEventListener("click", () => deleteToDo(task.taskID)); // ボタンがクリックされたらdeleteToDo関数を呼び出し
 
-        // Adds all the elements in the correct order under the li element we created
+        // li要素に各要素を順番に追加
         showTask.appendChild(showDescription);
         showTask.appendChild(completeTask);
         showTask.appendChild(deleteTask);
-        taskList.appendChild(showTask); // Adds the complete li element to the ul element
-
+        taskList.appendChild(showTask); // ul要素にli要素を追加
     });
 }
+
+// フォーム入力から新しいタスクを追加する関数
+taskForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // ページリロードを防止
+
+    const taskDescription = taskInput.value.trim(); // 入力フィールドの値を取得して前後の空白を削除
+
+    // 入力が空白の場合のバリデーション
+    if (taskDescription === "") {
+        message.innerText = "Uppgiften kan inte vara tom."; // エラーメッセージを表示
+        return;
+    }
+
+    // 新しいタスクを作成し、toDoListに追加
+    const newTask = {
+        taskID: Date.now(), // 各タスクにユニークなIDを付与
+        taskDescription: taskDescription,
+        isCompleted: false
+    };
+
+    toDoList.push(newTask); // 新しいタスクをリストに追加
+    taskInput.value = ""; // 入力フィールドをクリア
+    saveToLocalStorage(); // localStorageに保存
+    showToDo(); // 画面にタスクリストを再表示
+});
+
+// タスクを完了としてマークする関数
+function markAsCompleteToDo(taskID) {
+    toDoList = toDoList.map(task =>
+        task.taskID === taskID ? { ...task, isCompleted: !task.isCompleted } : task
+    );
+    saveToLocalStorage(); // localStorageに保存
+    showToDo(); // 画面にタスクリストを再表示
+}
+
+// タスクを削除する関数
+function deleteToDo(taskID) {
+    toDoList = toDoList.filter(task => task.taskID !== taskID); // 指定したID以外のタスクだけを残す
+    saveToLocalStorage(); // localStorageに保存
+    showToDo(); // 画面にタスクリストを再表示
+}
+
+// タスクリストをlocalStorageに保存する関数
+function saveToLocalStorage() {
+    localStorage.setItem("toDoList", JSON.stringify(toDoList));
+}
+
+// ページ読み込み時にlocalStorageからタスクリストを読み込む
+document.addEventListener("DOMContentLoaded", function () {
+    const savedTasks = localStorage.getItem("toDoList");
+    if (savedTasks) {
+        toDoList = JSON.parse(savedTasks); // 保存されたタスクリストを読み込む
+        showToDo(); // 読み込んだタスクリストを表示
+    }
+});
