@@ -119,24 +119,14 @@ li button {
 #taskList li {
     margin: 10px 0;
     padding: 10px;
-    border: 1px solid #ccc;
     list-style-type: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.completed {
-    text-decoration: none;
-    color: rgb(3, 3, 3);
-}
-
 .completeButton, .deleteButton, .editButton {
     margin-left: 10px;
-}
-
-.crossover {
-    text-decoration: line-through;
 }
 
 .saveButton {
