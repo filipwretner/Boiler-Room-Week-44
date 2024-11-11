@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    background-color: #f4f4f4;
+    background-color: gray;
     margin: 0;
     padding: 0;
     display: flex;
@@ -127,10 +127,18 @@ li button {
 }
 
 .completed {
-    text-decoration: line-through;
+    text-decoration: none;
     color: rgb(3, 3, 3);
 }
 
 .completeButton, .deleteButton, .editButton {
     margin-left: 10px;
+}
+
+.crossover {
+    text-decoration: line-through;
+}
+
+.saveButton {
+    color: rgb(0, 0, 0);
 }

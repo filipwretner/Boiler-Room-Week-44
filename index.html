@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,7 @@
     <div class="container">
         <h1>To-Do Applikation</h1>
         <form id="taskForm">
-            <input type="text" id="taskInput" placeholder="Ange en ny uppgift" required> 
-            <input type="text" id="categoryInput" placeholder="Ange kategori">
+            <input type="text" id="taskInput" placeholder="Ange en ny uppgift"> 
             <button type="submit">Lägg till i To-Do List</button>
             <p id="message"></p>
         </form>
@@ -24,8 +23,8 @@
             </select>
 
             <select id="sortSelect">
-                <option value="date">Sortera efter datum</option>
-                <option value="status">Sortera efter status</option>
+                <option value="date">Sortera efter senaste</option>
+                <option value="status">Sortera efter ej klara</option>
             </select>
 
             <input type="text" id="searchInput" placeholder="Sök uppgifter">
