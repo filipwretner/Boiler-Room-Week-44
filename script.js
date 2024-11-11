@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to display tasks on the webpage
     function updateTaskElements() {
-        message.innerText = "";
+        
         taskList.innerHTML = ""; 
 
         let filteredTasks = [...toDoList]; // Create a copy of the task list for filtering and sorting
@@ -70,22 +70,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Apply sorting
-        const sortValue = sortSelect.value; // Get the selected sort value from the dropdown
+        const sortValue = sortSelect.value;
         if (sortValue === "date") {
-            filteredTasks.sort((a, b) => a.taskID - b.taskID); // Sort tasks by date
+            filteredTasks.sort((a, b) => a.taskID - b.taskID); // Sort by date - ID = Date
         } else if (sortValue === "status") {
-            filteredTasks.sort((a, b) => a.isCompleted - b.isCompleted); // Sort tasks by their completion status
+            filteredTasks.sort((a, b) => a.isCompleted - b.isCompleted);
         }
 
         // Loop through the filtered and sorted tasks and create HTML elements for each
         filteredTasks.forEach(task => {
 
-             // Create a list item (li) element for each task
+            // Create a list item (li) element for each task
             const showTask = document.createElement("li");
             showTask.className = task.isCompleted ? "completed" : ""; // Assign the 'completed' class if the task is done, otherwise leave it empty
             showTask.dataset.id = task.taskID;
 
-             // Create a paragraph element for the task description
+            // Create a paragraph element for the task description
             const showDescription = document.createElement("p");
             showDescription.textContent = `${task.taskDescription} `;
 
