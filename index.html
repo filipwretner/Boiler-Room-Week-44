@@ -7,31 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>To-Do Applikation</h1>
-        <form id="taskForm">
-            <input type="text" id="taskInput" placeholder="Ange en ny uppgift"> 
-            <button type="submit">Lägg till i To-Do List</button>
-            <p id="message"></p>
-        </form>
 
-        <div class="controls">
-            <select id="filterSelect">
-                <option value="all">Visa alla</option>
-                <option value="completed">Klara</option>
-                <option value="not_completed">Ej klara</option>
-            </select>
+    <h1>Monster Arena</h1>
+    <div id="messageDiv"></div>
 
-            <select id="sortSelect">
-                <option value="date">Sortera efter senaste</option>
-                <option value="status">Sortera efter ej klara</option>
-            </select>
+    <section id="allMonsterSection">
+        <h2>Monsterkatalog</h2>
+        <div id="monster-container"></div>
+    </section>
 
-            <input type="text" id="searchInput" placeholder="Sök uppgifter">
-        </div>
+    <section id="teamSection">
+        <h2>Ditt lag</h2>
+        <div id="teamContainer"></div>
+        <button id="resetButton">Återställ laget</button>
+    </section>
 
-        <ul id="taskList"></ul>
-    </div>
     <script src="script.js"></script>
 </body>
 </html>
