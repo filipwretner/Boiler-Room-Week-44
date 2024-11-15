@@ -1,0 +1,52 @@
+[
+    {
+      "id": 0,
+      "name": "Count Dracula",
+      "speciality": "Sleep, spook, drink blood, repeat",
+      "image": "/assets/Dracula.jpg"
+    },
+    {
+      "id": 1,
+      "name": "Fast Frankenstein's Monster",
+      "speciality": "Runs faster than you think",
+      "image": "Assets/Stein.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Ghost",
+      "speciality": "Rattle some chains",
+      "image": "Assets/ghost.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Jason",
+      "speciality": "What doesn't this psychopath do",
+      "image": "Assets/jason.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Samara",
+      "speciality": "She'll weird you out and disturb you every time you watch TV",
+      "image": "Assets/samara.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Scarecrow",
+      "speciality": "If you have trouble with crows on your crops - this is your man",
+      "image": "Assets/Scarecrow.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Troll",
+      "speciality": "A gentle soul who wants to be your ally (read friend)",
+      "image": "Assets/troll.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Witch",
+      "speciality": "She's mostly into animals and love potions",
+      "image": "Assets/witch.jpg"
+    }
+    
+  ]
+  
