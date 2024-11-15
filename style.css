@@ -2,37 +2,54 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    background-image: url(https://img.freepik.com/premium-photo/spooky-halloween-background-with-empty-wooden-planks-dark-horror-background_132358-14427.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-#allMonsterSection {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: white;
 }
 
-#teamSection {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
+#messageDiv {
+    margin-bottom: 20px;
+}
+
+#container {
+ display: flex;
+ justify-content: space-between;
+ gap: 20px;
+ padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+#allMonsterSection, #teamSection {
+    flex: 1;
+    padding: 10px;
+    background-color: orange;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .monsterCard {
-    background-color: #fff;
+    background-color: darkgray;
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.4s;
+    margin-bottom: 1rem;
 }
 
 .monsterCard:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .monsterCard img {
@@ -47,4 +64,51 @@ body {
 .monsterSpeciality {
     font-size: 1rem;
 }
+
+button {
+    cursor: pointer;
+}
+
+.addButton, .removeButton {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+.addButton {
+    background-color: lime;
+}
+
+.addButton:hover {
+    background-color: limegreen;
+}
+
+.removeButton {
+    background-color: red;
+}
+
+.removeButton {
+    background-color: darkred;
+}
+
+#resetButton {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: yellow;
+    font-size: 20px;
+    border: none;
+}
+
+#resetButton:hover {
+    background-color: gold;
+}
+
+/* @media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+    }
+} */
 
