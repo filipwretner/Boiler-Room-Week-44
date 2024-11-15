@@ -7,6 +7,12 @@ fetch('./monsters.json')
   .then(data => {
     allMonsters = data; // Spara JSON-data i arrayen
     displayMonsters(allMonsters); // Skicka arrayen till displayMonsters
+
+    const savedTeam = localStorage.getItem("monsterTeam");
+    if (savedTeam) {
+        firstUserTeam = JSON.parse(savedTeam);
+        renderTeam();
+    }
   })
   .catch(error => console.error("Error när monsterdata skulle hämtas", error));
 
@@ -22,6 +28,9 @@ function displayMonsters(monsterList) {
         const monsterImg = document.createElement('img');
         monsterImg.src = monster.image;
         monsterImg.alt = monster.name;
+
+        const monsterDetails = document.createElement("div");
+        monsterDetails.classList.add("monsterDetails");
         
         const monsterName = document.createElement('h3');
         monsterName.classList.add("monsterName");
@@ -37,9 +46,10 @@ function displayMonsters(monsterList) {
         addButton.addEventListener("click", () => addToTeam(monster));
 
         monsterCard.appendChild(monsterImg);
-        monsterCard.appendChild(monsterName);
-        monsterCard.appendChild(monsterSpeciality);
-        monsterCard.appendChild(addButton);
+        monsterCard.appendChild(monsterDetails)
+        monsterDetails.appendChild(monsterName);
+        monsterDetails.appendChild(monsterSpeciality);
+        monsterDetails.appendChild(addButton);
 
         container.appendChild(monsterCard);
         
@@ -55,14 +65,16 @@ function addToTeam(monster) {
         messageDiv.textContent = ""; // clear any previous message
         renderTeam();
         saveTeamToLocalStorage();
-    }else{
+    } else if (firstUserTeam.length >= 4) {
         messageDiv.textContent = "You can only select up to 4 unique monsters.";
+    } else {
+        messageDiv.textContent = "You can't select the same monster twice";
     }
 }
 
 // Removes a monster from the user's team
 function removeFromTeam(monster){
-    firstUserTeam = firstUserTeam.filter(m => m.id !== monster.id);
+    firstUserTeam = firstUserTeam.filter(id => id !== monster.id);
     renderTeam();
     saveTeamToLocalStorage();
 }
@@ -87,6 +99,10 @@ function renderTeam() {
         monsterImg.setAttribute("src", monster.image);
         monsterImg.setAttribute("alt", monster.name);
 
+        // Adds container for text and button
+        const monsterDetails = document.createElement("div");
+        monsterDetails.classList.add("monsterDetails");
+
         // Creating the name element
         const monsterName = document.createElement("h3");
         monsterName.classList.add("monsterName");
@@ -105,9 +121,10 @@ function renderTeam() {
 
         // Appending the elements in the correct order
         monsterCard.appendChild(monsterImg);
-        monsterCard.appendChild(monsterName);
-        monsterCard.appendChild(monsterSpeciality);
-        monsterCard.appendChild(removeButton);
+        monsterCard.appendChild(monsterDetails);
+        monsterDetails.appendChild(monsterName);
+        monsterDetails.appendChild(monsterSpeciality);
+        monsterDetails.appendChild(removeButton);
     
         teamContainer.appendChild(monsterCard);
     });

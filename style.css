@@ -17,6 +17,8 @@ h1 {
 
 #messageDiv {
     margin-bottom: 20px;
+    text-align: center;
+    color: white;
 }
 
 #container {
@@ -36,6 +38,7 @@ h2 {
     background-color: orange;
     text-align: center;
     border-radius: 10px;
+    max-width: 500px;
 }
 
 .monsterCard {
@@ -46,6 +49,14 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.4s;
     margin-bottom: 1rem;
+    width: 300px;
+    height: 450px;
+    margin: auto auto 1rem;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .monsterCard:hover {
@@ -54,6 +65,9 @@ h2 {
 
 .monsterCard img {
     width: 100%;
+    height: auto;
+    max-height: 50%;
+    object-fit:contain
 }
 
 .monsterName {
@@ -69,13 +83,19 @@ button {
     cursor: pointer;
 }
 
-.addButton, .removeButton {
+.monsterDetails {
     width: 100%;
+    margin-top: auto;
+}
+
+.addButton, .removeButton {
+    width: 90%;
     padding: 10px;
     font-weight: bold;
     border: none;
     border-radius: 10px;
     color: white;
+    margin-top: 5px;
 }
 
 .addButton {
@@ -90,7 +110,7 @@ button {
     background-color: red;
 }
 
-.removeButton {
+.removeButton:hover {
     background-color: darkred;
 }
 
