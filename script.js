@@ -5,10 +5,10 @@ const messageDiv = document.getElementById("messageDiv");
 fetch('./monsters.json')
   .then(response => response.json())
   .then(data => {
-    allMonsters = data; // Spara JSON-data i arrayen
-    displayMonsters(allMonsters); // Skicka arrayen till displayMonsters
+    allMonsters = data; // Saves JSON in main array
+    displayMonsters(allMonsters); 
 
-    const savedTeam = localStorage.getItem("monsterTeam");
+    const savedTeam = localStorage.getItem("monsterTeam"); // Adds the previously saved team to current load
     if (savedTeam) {
         firstUserTeam = JSON.parse(savedTeam);
         renderTeam();
@@ -20,31 +20,39 @@ const container = document.getElementById("monster-container");
 
 function displayMonsters(monsterList) {
 
+    // Adds HTML structure
     monsterList.forEach(monster => {
         
+        // Creating the card
         const monsterCard = document.createElement('div');
         monsterCard.classList.add("monsterCard");
 
+        // Creating the image element
         const monsterImg = document.createElement('img');
         monsterImg.src = monster.image;
         monsterImg.alt = monster.name;
 
+        // Creating container for text and button
         const monsterDetails = document.createElement("div");
         monsterDetails.classList.add("monsterDetails");
         
+        // Creating the element for name
         const monsterName = document.createElement('h3');
         monsterName.classList.add("monsterName");
         monsterName.textContent = monster.name;
 
+        // Creating the element for the text
         const monsterSpeciality = document.createElement('p');
         monsterSpeciality.classList.add("monsterSpeciality");
         monsterSpeciality.textContent = monster.speciality;
 
+        // Creating the add to team button
         const addButton = document.createElement("button");
         addButton.classList.add("addButton");
         addButton.textContent = "Add to your team";
         addButton.addEventListener("click", () => addToTeam(monster));
 
+        // Appending each element to the corresponding parent
         monsterCard.appendChild(monsterImg);
         monsterCard.appendChild(monsterDetails)
         monsterDetails.appendChild(monsterName);
@@ -57,24 +65,27 @@ function displayMonsters(monsterList) {
 }
 
 
-// Adds a monster to the user's team
 function addToTeam(monster) {
 
     if (firstUserTeam.length < 4 && !firstUserTeam.includes(monster.id)) {
+
         firstUserTeam.push(monster.id);
-        messageDiv.textContent = ""; // clear any previous message
+        messageDiv.textContent = "";
         renderTeam();
         saveTeamToLocalStorage();
+
     } else if (firstUserTeam.length >= 4) {
         messageDiv.textContent = "You can only select up to 4 unique monsters.";
+
     } else {
         messageDiv.textContent = "You can't select the same monster twice";
     }
 }
 
-// Removes a monster from the user's team
+
 function removeFromTeam(monster){
-    firstUserTeam = firstUserTeam.filter(id => id !== monster.id);
+    firstUserTeam = firstUserTeam.filter(id => id !== monster.id); // Finds monster with corresponding ID of the button we pressed
+    messageDiv.textContent = "";
     renderTeam();
     saveTeamToLocalStorage();
 }
@@ -84,6 +95,7 @@ function renderTeam() {
     const teamContainer = document.getElementById("teamContainer");
     teamContainer.innerHTML = "";
 
+    // Adds HTML structure
     firstUserTeam.forEach(id => {
 
         // Selecting monster from the main array with the IDs of the monsters in the team array
@@ -119,7 +131,7 @@ function renderTeam() {
         removeButton.textContent = "Remove from your team";
         removeButton.addEventListener("click", () => removeFromTeam(monster));
 
-        // Appending the elements in the correct order
+        // Appending each element to corresponding parent
         monsterCard.appendChild(monsterImg);
         monsterCard.appendChild(monsterDetails);
         monsterDetails.appendChild(monsterName);
@@ -132,6 +144,7 @@ function renderTeam() {
 
 document.getElementById("resetButton").addEventListener("click", () => {
     firstUserTeam = [];
+    messageDiv.textContent = "";
     saveTeamToLocalStorage();
     renderTeam();
 });
@@ -140,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTeam = localStorage.getItem("monsterTeam");
 
     if (savedTeam) {
-        firstUserTeam = JSON.parse(savedTeam); // Återställ laget från LocalStorage
-        renderTeam(); // Visa varje monster i laget på sidan
+        firstUserTeam = JSON.parse(savedTeam); // Adds the team saved in localStorage when the page loads
+        renderTeam();
     }
 
 });
