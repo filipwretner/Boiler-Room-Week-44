@@ -42,7 +42,7 @@ function displayMonsters(monsterList) {
 
         const addButton = document.createElement("button");
         addButton.classList.add("addButton");
-        addButton.textContent = "Lägg till i ditt lag";
+        addButton.textContent = "Add to your team";
         addButton.addEventListener("click", () => addToTeam(monster));
 
         monsterCard.appendChild(monsterImg);
@@ -116,7 +116,7 @@ function renderTeam() {
         // Creating the remove button
         const removeButton = document.createElement("button");
         removeButton.classList.add("removeButton");
-        removeButton.textContent = "Ta bort från ditt lag"
+        removeButton.textContent = "Remove from your team";
         removeButton.addEventListener("click", () => removeFromTeam(monster));
 
         // Appending the elements in the correct order
