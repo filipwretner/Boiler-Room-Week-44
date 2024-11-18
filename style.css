@@ -38,7 +38,13 @@ h2 {
     background-color: orange;
     text-align: center;
     border-radius: 10px;
-    max-width: 500px;
+    max-width: 1000px;
+}
+
+#monster-container, #teamContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 }
 
 .monsterCard {
@@ -129,6 +135,10 @@ button {
 @media (max-width: 768px) {
     #container {
         flex-direction: column;
+    }
+
+    #monster-container, #teamContainer {
+        display: block;
     }
 }
 
